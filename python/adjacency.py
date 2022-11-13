@@ -1,7 +1,7 @@
 from collections import defaultdict
 def graph(adj):
     for i in adj:
-        print(i,"-",adj[i])
+        print(i,"->",adj[i])
 n,e = map(int,input().split())
 adj = defaultdict(list)
 for i in range(e):

@@ -22,7 +22,7 @@ def dfs(adj, visited):
     for i in visited.keys():
         if visited[i] == False:
             dfsutil(adj, visited, i, curr)
-    print(curr)
+    return curr
 
 
 if __name__ == '__main__':
@@ -33,4 +33,6 @@ if __name__ == '__main__':
     for i in range(m):
         a, b = map(int, input().split())
         adj[b].append(a)
-dfs(adj, visited)
+res = dfs(adj, visited)
+for i in res:
+    print(i, end = " ")

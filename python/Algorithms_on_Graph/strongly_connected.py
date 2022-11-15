@@ -6,17 +6,9 @@ adj = defaultdict(list)
 inv_adj = defaultdict(list)
 visited = {}
 
-
-def graph(adj):
-    for i in adj:
-        print(i, "->", adj[i])
-
-
-def DFSUtil(v,visited):
+def DFSUtil(v, visited):
     # Mark the current node as visited and print it
     visited[v] = True
-    # print(v)
-    #Recur for all the vertices adjacent to this vertex
     for i in inv_adj[v]:
         if visited[i] == False:
             DFSUtil(i, visited)
@@ -36,14 +28,14 @@ def ssc(adj, visited):
             fill(adj, visited, i, order)
 
 
-    for i in range(1,len(visited)+1):
+    for i in visited.keys():
         visited[i] = False
     cc = 0
     while order:
         i = order.pop()
         if visited[i] == False:
             DFSUtil(i, visited)
-            cc+=1
+            cc += 1
     print(cc)
 
 if __name__ == '__main__':

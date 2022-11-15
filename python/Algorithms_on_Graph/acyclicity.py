@@ -3,24 +3,29 @@ from collections import defaultdict
 adj = defaultdict(list)
 visited = {}
 
+def graph(adj):
+    for i in adj:
+        print(i, "->", adj[i])
 
 def dfsutil(adj, visited, u, curr):
     curr.add(u)
-    visited[u] = True
     for i in adj[u]:
         if i in curr:
-            return 0
-        else:
-            if visited[i] == False:
-                return dfsutil(adj, visited, i, curr)
-    return 1
+            return False
+        if visited[i] == False:
+            visited[i] = True
+            if dfsutil(adj, visited, i, curr) == False:
+                return False
+    curr.remove(u)
+    return True
 
 
 def dfs(adj, visited):
     for i in visited.keys():
         curr = set()
         if visited[i] == False:
-            if dfsutil(adj, visited, i, curr) == 0:
+            visited[i] = True
+            if dfsutil(adj, visited, i, curr) == False:
                 return 1
     return 0
 
@@ -32,6 +37,6 @@ if __name__ == '__main__':
         visited[i] = False
     for i in range(m):
         a, b = map(int, input().split())
-        adj[a].append(b)
+        adj[b].append(a)
 
 print(dfs(adj, visited))
